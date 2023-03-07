@@ -39,23 +39,31 @@ async function put(req, res) {
     message: 'success',
     product,
   });
-};
 
-/* se não precisar retornar o produto
+  /* se não precisar retornar o produto
 
   const product = await ProductsModel.findOne({ _id: id });
 
   await product.updateOne(req.body);
 
+  */
+};
+
+async function remove(req, res) {
+  const { id } = req.params;
+
+  const remove = await ProductsModel.deleteOne({ _id: id });
+
+  const message = remove ? 'success' : 'error';
+
   res.send({
-    message: 'success',
-    product,
+    message
   });
 };
-*/
 
 module.exports = {
   get,
   post,
   put,
+  remove,
 };
